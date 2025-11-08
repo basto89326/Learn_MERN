@@ -1,20 +1,24 @@
 // Attach .env variables to process object
 require('dotenv').config()
 
-// Setting up express app
 const express = require('express')
+const playerRoutes = require('./routes/players')
+
+// Setting up express app
 const app = express()
 
-// Middleware - log incoming requests 
+// Middleware 
+app.use(express.json())
+
+    // Log incoming requests 
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
 
-// Routes
-app.get('/', (req, res) => {
-    res.json({mssg: 'Welcome to the app'})
-})
+// Using routes from playerRoutes 
+// IMPORTANT: playerRoutes add on /api/players to the start of paths
+app.use('/api/players', playerRoutes)
 
 // Listen for requests (hiding port no)
 app.listen(process.env.PORT, () => {
