@@ -2,6 +2,7 @@
 require('dotenv').config()
 
 const express = require('express')
+const mongoose = require('mongoose')
 const playerRoutes = require('./routes/players')
 
 // Setting up express app
@@ -20,7 +21,15 @@ app.use((req, res, next) => {
 // IMPORTANT: playerRoutes add on /api/players to the start of paths
 app.use('/api/players', playerRoutes)
 
-// Listen for requests (hiding port no)
-app.listen(process.env.PORT, () => {
-    console.log('Listening on port', process.env.PORT)
-})
+// Connect to DB 
+// .then fires function when connected, and .catch catches any errors
+mongoose.connect(process.env.MONG_URI)
+    .then(() => {
+        // Listen for requests only once connected to DB
+        app.listen(process.env.PORT, () => {
+            console.log('Connected to DB, listening on port', process.env.PORT)
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
