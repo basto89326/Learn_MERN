@@ -1,0 +1,66 @@
+---
+title: "brownlow_stats_analysis"
+author: "Jack Bastasin"
+date: "2026-01-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r preprocessing}
+library(glmnet)
+
+player_stats <- read.csv('player_stats.csv')
+player_stats_x <- player_stats[-c(1, 15)]
+player_stats_y <- player_stats[15]
+
+player_stats_x_matrix <- as.matrix(player_stats_x)
+player_stats_y_matrix <- as.matrix(player_stats_y)
+```
+
+
+# Multi-class logistic regression
+
+```{r mclr}
+set.seed(45)
+cv_fit <- cv.glmnet(player_stats_x_matrix,
+                    player_stats_y_matrix,
+                    family = 'multinomial',
+                    alpha = 1,
+                    type.measure = 'deviance',
+                    nfolds = 10)
+
+plot(cv_fit)
+
+lambda_min <- cv_fit$lambda.min
+
+coefs <- coef(cv_fit, s = "lambda.min")
+print(coefs)
+
+final_fit <- glmnet(player_stats_x_matrix,
+                    player_stats_y_matrix,
+                    family = "multinomial",
+                    alpha = 1,
+                    lambda = lambda_min)
+
+# In-sample cross-entropy loss
+train_probs <- predict(final_fit,
+                       newx = player_stats_x_matrix,
+                       s = lambda_min,
+                       type = 'response')
+
+train_probs <- train_probs[,,1]
+
+# y as numeric class labels 1..K (same coding used to fit glmnet)
+y <- as.numeric(player_stats_y_matrix)
+
+# pick probability of the true class for each row
+p_true <- train_probs[cbind(seq_len(nrow(train_probs)), y)]
+
+eps <- 1e-15
+in_sample_error <- -mean(log(pmax(p_true, eps)))
+in_sample_error
+```
+

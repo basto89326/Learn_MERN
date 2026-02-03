@@ -1,4 +1,4 @@
-Player,Kicks,Marks,Handballs,Goals,Behinds,Hitouts,Tackles,Rebound50s,Inside50s,Clearances,Clangers,FreeKicksFor,FreeKicksAgainst,BrownlowVotes,Contested,ContestedMarks  ,MarksInside50,1%  ,Bounces,GoalAssists,TOG,PositionDef,PositionInsideMid,PositionRuck,PositionFor,Win
+Player,Kicks,Marks,Handballs,Goals,Behinds,Hitouts,Tackles,Rebound50s,Inside50s,Clearances,Clangers,FreeKicksFor,FreeKicksAgainst,BrownlowVotes,Contested,ContestedMarks,MarksInside50,OnePercenters,Bounces,GoalAssists,TOG,PositionDef,PositionInsideMid,PositionRuck,PositionFor,Win
 "Adams, Taylor",4,3,4,1,0,0,0,0,2,1,3,0,1,0,3,0,1,0,0,1,54,0,0,0,0,0
 "Amartey, Joel",7,4,4,3,1,1,2,0,0,0,0,2,0,0,5,0,1,1,0,0,82,0,0,0,1,0
 "Blakey, Nick",21,3,5,1,0,0,0,13,1,0,4,2,0,0,6,0,0,6,4,0,87,1,0,0,0,0
@@ -3283,7 +3283,7 @@ Player,Kicks,Marks,Handballs,Goals,Behinds,Hitouts,Tackles,Rebound50s,Inside50s,
 "Serong, Caleb",14,3,11,0,1,0,4,0,8,7,1,1,0,0,9,0,0,2,0,1,78,0,1,0,0,0
 "Sharp, Jeremy",7,2,6,1,0,0,0,1,3,1,3,0,0,0,4,0,0,0,0,0,92,0,0,0,0,0
 "Simpson, Cooper",11,6,7,0,0,0,0,2,3,0,3,0,2,0,2,0,0,1,0,0,73,1,0,0,0,0
-"Switkowski, Sam",6,4,13,1,0,0,0,0,1,1,1,0,1,0,5,0,0,1,0,1,82, ,0,0,1,0
+"Switkowski, Sam",6,4,13,1,0,0,0,0,1,1,1,0,1,0,5,0,0,1,0,1,82,0,0,0,1,0
 "Treacy, Josh",6,5,5,2,0,0,2,0,2,0,4,0,2,0,8,3,0,0,0,0,91,0,0,0,1,0
 "Voss, Patrick",5,2,0,2,0,1,0,0,1,0,1,1,0,0,3,1,1,0,0,0,74,0,0,0,1,0
 "Wagner, Corey",7,4,7,0,0,0,5,2,2,3,2,0,1,0,4,0,0,0,0,0,67,0,0,0,0,0
