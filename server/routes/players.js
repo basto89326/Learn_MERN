@@ -1,4 +1,5 @@
 const express = require('express')
+const Player = require('../models/playerModel')
 const router = express.Router()
 
 // GET all players
@@ -12,8 +13,16 @@ router.get('/:id', (req, res) => {
 })
 
 // POST a new player
-router.post('/', (req, res) => {
-    res.json({mssg: 'POST a new player'})
+// Using async and await because Player.create function is asynchronous
+router.post('/', async(req, res) => {
+    const {name, disposals, goals, votes} = req.body
+
+    try {
+        const player = await Player.create({name, disposals, goals, votes})
+        res.status(200).json(player)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
 })
 
 // DELETE a player
