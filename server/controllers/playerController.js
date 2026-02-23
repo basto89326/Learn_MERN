@@ -41,13 +41,48 @@ const createPlayer = async(req, res) => {
 }
 
 // Delete a player
+const deletePlayer = async(req, res) => {
+    const { id } = req.params
 
+    // Checking that id is a valid id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Invalid ID'})
+    }
+
+    const player = await Player.findOneAndDelete({_id: id})  // _id is the property name in mongodb
+
+    if (!player) {
+        return res.status(404).json({error: 'No such player exists'})
+    }
+
+    res.status(200).json(player)
+}
 
 // Update a player
+const updatePlayer = async(req, res) => {
+    const { id } = req.params
+
+    // Checking that id is a valid id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Invalid ID'})
+    }
+
+    const player = await Player.findOneAndUpdate({_id: id}, {
+        ...req.body  // "..." spreads the properties of the object (eg: name, disposals, goals, votes)
+    })
+
+    if (!player) {
+        return res.status(404).json({error: 'No such player exists'})
+    }
+
+    res.status(200).json(player)
+}
 
 
 module.exports = {
     getAllPlayers,
     getPlayer,
-    createPlayer
+    createPlayer,
+    deletePlayer,
+    updatePlayer
 }

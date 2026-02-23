@@ -2,7 +2,9 @@ const express = require('express')
 const {
     getAllPlayers,
     getPlayer,
-    createPlayer
+    createPlayer,
+    deletePlayer,
+    updatePlayer
 } = require('../controllers/playerController')
 
 const router = express.Router()
@@ -17,14 +19,10 @@ router.get('/:id', getPlayer)
 router.post('/', createPlayer)
 
 // DELETE a player
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE a player'})
-})
+router.delete('/:id', deletePlayer)
 
 // UPDATE a player
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE a player'})
-})
+router.patch('/:id', updatePlayer)
 
 // Export router
 module.exports = router
