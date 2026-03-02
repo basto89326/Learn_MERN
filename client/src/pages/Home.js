@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 
 // components
 import PlayerDetails from '../components/PlayerDetails'
+import PlayerForm from '../components/PlayerForm'
 
 const Home = () => {
     const [players, setPlayers] = useState(null)
@@ -27,6 +28,7 @@ const Home = () => {
                     <PlayerDetails key={player._id} player={player} />
                 ))}
             </div>
+            <PlayerForm />
         </div>
     )
 }

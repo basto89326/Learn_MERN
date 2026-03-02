@@ -8,12 +8,8 @@ const playerSchema = new Schema({
         type: String,
         required: true
     },
-    disposals: {
-        type: Number,
-        required: true
-    },
-    goals: {
-        type: Number,
+    team: {
+        type: String,
         required: true
     },
     votes: {

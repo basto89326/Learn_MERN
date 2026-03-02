@@ -29,11 +29,11 @@ const getPlayer = async(req, res) => {
 
 // Create new player
 const createPlayer = async(req, res) => {
-    const {name, disposals, goals, votes} = req.body
+    const {name, team, votes} = req.body
 
     // Add doc to database
     try {
-        const player = await Player.create({name, disposals, goals, votes})
+        const player = await Player.create({name, team, votes})
         res.status(200).json(player)
     } catch (error) {
         res.status(400).json({error: error.message})
