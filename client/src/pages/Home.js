@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect} from "react"
+import { usePlayersContext } from "../hooks/usePlayersContext"  // Use instead of useState hook
 
 // components
 import PlayerDetails from '../components/PlayerDetails'
 import PlayerForm from '../components/PlayerForm'
 
 const Home = () => {
-    const [players, setPlayers] = useState(null)
+    //const [players, setPlayers] = useState(null)
+    const {players, dispatch} = usePlayersContext()
 
     useEffect(() => {
         const fetchPlayers = async() => {
@@ -13,7 +15,8 @@ const Home = () => {
             const json = await response.json()  // json = array of data
             
             if (response.ok) {
-                setPlayers(json)  // From getAllPlayers controller
+                //setPlayers(json)  // From getAllPlayers controller
+                dispatch({type: 'SET_PLAYERS', payload: json})
             }
         }
 

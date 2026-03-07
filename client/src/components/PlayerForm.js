@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { usePlayersContext } from "../hooks/usePlayersContext"
 
 const PlayerForm = () => {
+    const { dispatch } = usePlayersContext()
+
     const [name, setName] = useState('')
     const [team, setTeam] = useState('')
     const [votes, setVotes] = useState('')
@@ -30,6 +33,7 @@ const PlayerForm = () => {
             setVotes('')
             setError(null)
             console.log('New player added', json)
+            dispatch({type: 'CREATE_PLAYER', payload: json})
         }
         
     }
