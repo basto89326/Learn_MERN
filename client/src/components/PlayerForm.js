@@ -8,6 +8,7 @@ const PlayerForm = () => {
     const [team, setTeam] = useState('')
     const [votes, setVotes] = useState('')
     const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
 
     // e = event object
     const handleSubmit = async(e) => {
@@ -27,11 +28,13 @@ const PlayerForm = () => {
 
         if (!response.ok) {
             setError(json.error)
+            setEmptyFields(json.emptyFields)
         } else {
             setName('')
             setTeam('')
             setVotes('')
             setError(null)
+            setEmptyFields([])
             console.log('New player added', json)
             dispatch({type: 'CREATE_PLAYER', payload: json})
         }
@@ -47,6 +50,7 @@ const PlayerForm = () => {
                 type="text"
                 onChange={(e) => setName(e.target.value)}
                 value={name}
+                className={emptyFields.includes('name') ? 'error' : ''}  // error class only if no name entered
             />
 
             <label>Player Team:</label>
@@ -54,6 +58,7 @@ const PlayerForm = () => {
                 type="text"
                 onChange={(e) => setTeam(e.target.value)}
                 value={team}
+                className={emptyFields.includes('team') ? 'error' : ''}  // error class only if no team entered
             />
 
             <label>Total Votes:</label>
@@ -61,6 +66,7 @@ const PlayerForm = () => {
                 type="number"
                 onChange={(e) => setVotes(e.target.value)}
                 value={votes}
+                className={emptyFields.includes('votes') ? 'error' : ''}  // error class only if no votes entered
             />
             
             <button>Add Player</button>

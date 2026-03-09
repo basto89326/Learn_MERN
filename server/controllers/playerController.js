@@ -31,6 +31,22 @@ const getPlayer = async(req, res) => {
 const createPlayer = async(req, res) => {
     const {name, team, votes} = req.body
 
+    let emptyFields = []
+
+    // Checking if any fields are empty
+    if (!name) {
+        emptyFields.push('name')
+    }
+    if (!team) {
+        emptyFields.push('team')
+    }
+    if (!votes) {
+        emptyFields.push('votes')
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
+    }
+
     // Add doc to database
     try {
         const player = await Player.create({name, team, votes})
